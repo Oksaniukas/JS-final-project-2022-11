@@ -2,8 +2,8 @@ let url = 'https://635d0154cb6cf98e56aa96bd.mockapi.io/productCards'
 let wrapper  = document.querySelector(".cards-list");
 let producerList = ["TOSHIBA", "APPLE", "HP", "ACER", "ASUS", "LENOVO", "DELL"];
 let processorList = ["AMD", "Intel", "AppleM1", "AppleM2"];
-let screenSizeList = ["13", "13.3", "14", "15.6", "16", "17.3"];
-let ramList = ["4", "8", "16", "32", "64"];
+let screenSizeList = [13, 13.3, 14, 15.6, 16, 17.3];
+let ramList = [4, 8, 16, 32, 64];
 let ssdList = ["128GB", "256GB", "512GB", "1TB", "2TB", "4TB"];
 let priceList = [600, 750, 900, 1100, 1220, 1500, 1800, 2200, 3000]
 
@@ -66,7 +66,7 @@ function render(list, parent) {
       `
     parent.append(newCard)
   });
-}
+};
 
 function countAmount(filterList, productList) {
   filterList.forEach(prod => {
@@ -78,10 +78,67 @@ function countAmount(filterList, productList) {
     })
 
     let el = document.querySelector(`.${prod}.result-amount`)
-    el.innerHTML = `(${amount})`
+    el.innerHTML = `(${amount})`;
+  })
+};
 
+function countScreen(filterList, productList) {
+  let elScreen = document.querySelectorAll('.screen.result-amount');
+  filterList.forEach(screen => {
+    let amount = 0;
+
+    productList.forEach(product => {
+      if (product.specs.screenSizeValue === screen) 
+      amount++
+    })
+
+    elScreen.forEach(screenFilterEl => {
+      if (screenFilterEl.dataset.screen == screen) {
+        screenFilterEl.innerHTML = `(${amount})`;
+      }
+    })
+    
   })
 }
+
+function countRam(filterList, productList) {
+  let elRam = document.querySelectorAll('.ram.result-amount');
+  filterList.forEach(ram => {
+    let amount = 0;
+
+    productList.forEach(product => {
+      if (product.specs.ram === ram) 
+      amount++
+    })
+
+    elRam.forEach(ramFilterEl => {
+      if (ramFilterEl.dataset.ram == ram) {
+        ramFilterEl.innerHTML = `(${amount})`;
+      }
+    })
+    
+  })
+}
+
+function countSsd(filterList, productList) {
+  let elSsd = document.querySelectorAll('.disk.result-amount');
+  filterList.forEach(disk => {
+    let amount = 0;
+
+    productList.forEach(product => {
+      if (product.specs.ssd === disk) 
+      amount++
+    })
+
+    elSsd.forEach(ssdFilterEl => {
+      if (ssdFilterEl.dataset.ssd === disk) {
+        ssdFilterEl.innerHTML = `(${amount})`;
+      }
+    })
+    
+  })
+}
+
 
 let x;
 async function getx() {
@@ -95,10 +152,9 @@ async function getx() {
   render(data, wrapper);
   countAmount(producerList, data);
   countAmount(processorList, data);
-
-  // countAmount(screenSizeList, data);
-  // countAmount(ssdList, data);
-  // countAmount(ramList, data)
+  countScreen(screenSizeList, data);
+  countRam(ramList, data)
+  countSsd(ssdList, data);
 
 }
 
