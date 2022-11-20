@@ -117,104 +117,104 @@
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">Iki 600 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(111)</div>
+                <div data-price="600/" class="price result-amount">(111)</div>
               </div>
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">600 - 750 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(79)</div>
+                <div data-price="600/750" class="price result-amount">(79)</div>
               </div>
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">750 - 900 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(91)</div>
+                <div data-price="750/900" class="price result-amount">(91)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">900 - 1100 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(125)</div>
+                <div data-price="900/1100" class="price result-amount">(125)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">1100 - 1220 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(73)</div>
+                <div data-price="1100/1220" class="price result-amount">(73)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">1220 - 1500 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(108)</div>
+                <div data-price="1220/1500" class="price result-amount">(108)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">1500 - 1800 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(97)</div>
+                <div data-price="1500/1800"class="price result-amount">(97)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">1800 - 2200 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(88)</div>
+                <div data-price="1800/2200" class="price result-amount">(88)</div>
               </div> 
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">2200 - 3000 €</span>
                 <div class="devider"></div>
-                <div class="result-amount">(110)</div>
+                <div data-price="2200/3000" class="price result-amount">(110)</div>
               </div>    
               <div class="filter-line">
                 <input type="checkbox" data-price="below600">
                 <span class="price-range">3000€ ir daugiau</span>
                 <div class="devider"></div>
-                <div class="result-amount">(80)</div>
+                <div data-price="/3000" class="price result-amount">(80)</div>
               </div>            
             </div>
 
             <div class="filter-item">
               <div class="filter-title">Gamintojas</div>
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">TOSHIBA</span>
                 <div class="devider"></div>
                 <div class="TOSHIBA result-amount">(111)</div>
               </div>
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">APPLE</span>
                 <div class="devider"></div>
                 <div class="APPLE result-amount">(79)</div>
               </div>
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">HP</span>
                 <div class="devider"></div>
                 <div class="HP result-amount">(91)</div>
               </div> 
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">ACER</span>
                 <div class="devider"></div>
                 <div class="ACER result-amount">(125)</div>
               </div> 
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">ASUS</span>
                 <div class="devider"></div>
                 <div class="ASUS result-amount">(73)</div>
               </div> 
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">LENOVO</span>
                 <div class="devider"></div>
                 <div class="LENOVO result-amount">(108)</div>
               </div> 
               <div class="filter-line">
-                <input type="checkbox" data-price="below600">
+                <input type="checkbox" class="check-producer">
                 <span class="price-range">DELL</span>
                 <div class="devider"></div>
                 <div class="DELL result-amount">(97)</div>
@@ -374,6 +374,7 @@
             <div class="sort-select-block">
               <div class="sort-input-label">Eiliškumas:</div>
               <select class="sort-select">
+                <option value="all"></option>
                 <option value="bestsellers">Populiariausios prekės</option>
                 <option value="price_asc">Kaina nuo žemiausios</option>
                 <option value="price_desc">Kaina nuo aukščiausios</option>
@@ -383,7 +384,8 @@
             </div>
             <div class="sort-select-block">
               <div class="sort-input-label">Rodyti:</div>
-              <select class="sort-select">
+              <select class="sort-select2">
+                <option value="0"> </option>
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -393,57 +395,7 @@
             </div>            
           </div>
           <div class="cards-list">
-            <!-- <div class="product-card">
-              <div class="product-image">
-                <img src="https://picfit.topocentras.lt/xcdn-cgi/image/fit=contain,format=auto,height=150,quality=80/media/catalog/product/e/n/eng_acer_aspire_3_a315_23_23g_silver_gallery_01_498093_1658939019.png" alt="Laptop">
-              </div>
-              <div class="product-name">
-                Nešiojamas kompiuteris ACER Aspire 3 A315 Athlon Silver 3050U/8/64GB+240GB SSD/Win 10
-              </div>
-              <div class="product-specs">
-                <div class="spec-line">
-                  <div class="label">Atmintinė: </div>
-                  <div class="value"> 8GB</div>
-                </div>
-                <div class="spec-line">
-                  <div class="label">Ekrano įstrižainė: </div>
-                  <div class="value"> 15.6" (~39,6cm)</div>
-                </div>
-                <div class="spec-line">
-                  <div class="label">SSD: </div>
-                  <span> </span>
-                  <div class="value"> 240GB</div>
-                </div>
-              </div>
-              <div class="product-price">
-                299,99 €
-              </div>
-              <div class="product-action-block">
-                <div class="to-cart-button">
-                  <img src="https://www.topocentras.lt/140fe2aeea6055f5fc2782fbc940be96.svg" alt="cart">
-                  <span>Į krepšelį</span>
-                </div>
-                <div class="favourite-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>                  
-                </div>
-              </div>
-              <div class="product-tax">
-                + 7,01 € Laikmenos mokestis
-              </div>
-
-              <div class="delivery-footer">
-                <img src="https://www.topocentras.lt/assets/icons/shipping.svg" alt="Delivery car">
-                <span>Turime! Atsiimkite per 30min.</span>
-              </div>
-
-              <div class="discount-code">
-                <img src="https://www.topocentras.lt/media/amasty/amlabel/1112184x84px-ikona-B.png" alt="discount">
-              </div>
-
-              <div class="e-price">E-kaina</div>
-              <div class="shop-price">Tik Topocentras.lt</div>
-            </div> -->
-          <!-- </div> -->
+         
         </section>
       </div>
     </div>

@@ -1,11 +1,12 @@
-let url = 'https://635d0154cb6cf98e56aa96bd.mockapi.io/productCards'
+let url = 'https://635d0154cb6cf98e56aa96bd.mockapi.io/productCards';
+let productList;
 let wrapper  = document.querySelector(".cards-list");
 let producerList = ["TOSHIBA", "APPLE", "HP", "ACER", "ASUS", "LENOVO", "DELL"];
 let processorList = ["AMD", "Intel", "AppleM1", "AppleM2"];
 let screenSizeList = [13, 13.3, 14, 15.6, 16, 17.3];
 let ramList = [4, 8, 16, 32, 64];
 let ssdList = ["128GB", "256GB", "512GB", "1TB", "2TB", "4TB"];
-let priceList = [600, 750, 900, 1100, 1220, 1500, 1800, 2200, 3000]
+// let priceList = ["600,00", "750,00", "900,00", "1100,00", "1220,00", "1500,00", "1800,00", "2200,00", "3000,00"]
 
 function render(list, parent) {
   parent.innerHTML = '';
@@ -68,7 +69,7 @@ function render(list, parent) {
   });
 };
 
-function countAmount(filterList, productList) {
+function countAmount(filterList, productList) { ///producer + processor
   filterList.forEach(prod => {
     let amount = 0;
 
@@ -99,7 +100,7 @@ function countScreen(filterList, productList) {
     })
     
   })
-}
+};
 
 function countRam(filterList, productList) {
   let elRam = document.querySelectorAll('.ram.result-amount');
@@ -118,15 +119,14 @@ function countRam(filterList, productList) {
     })
     
   })
-}
+};
 
 function countSsd(filterList, productList) {
   let elSsd = document.querySelectorAll('.disk.result-amount');
   filterList.forEach(disk => {
     let amount = 0;
-
     productList.forEach(product => {
-      if (product.specs.ssd === disk) 
+      if (product.specs.ssd === disk)
       amount++
     })
 
@@ -135,28 +135,207 @@ function countSsd(filterList, productList) {
         ssdFilterEl.innerHTML = `(${amount})`;
       }
     })
-    
+  })
+};
+
+function countPrice(productList) {
+  let elPrice = document.querySelectorAll('.price.result-amount');
+  elPrice.forEach(label => {
+    let priceRange = label.dataset.price /// 600/
+    if (priceRange === '600/') {
+      let amount = productList.filter(product => 
+        parseFloat(product.price) < 600).length  //parseFloat возвращает число с плавающей точкой//вернёт массис с ценами ниже 600, .length  - длина массива, котор записываем в скобки
+        // console.log(amount)
+        label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '600/750') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 600 && parseFloat(product.price) < 750).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '750/900') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 750 && parseFloat(product.price) < 900).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '900/1100') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 900 && parseFloat(product.price) < 1100).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '1100/1220') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 1100 && parseFloat(product.price) < 1220).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '1220/1500') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 1220 && parseFloat(product.price) < 1500).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '1500/1800') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 1500 && parseFloat(product.price) < 1800).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '1800/2200') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 1800 && parseFloat(product.price) < 2200).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '2200/3000') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 2200 && parseFloat(product.price) < 3000).length  
+      label.innerHTML = `(${amount})`
+    }
+
+    if (priceRange === '/3000') {
+      let amount = productList.filter(product => 
+      parseFloat(product.price) >= 3000).length  
+      label.innerHTML = `(${amount})`
+    }
   })
 }
+
+///sort product by price/name/// // arr.sort( (a, b) => a - b );///// sort( (a, b) => a > b ? 1 : -1) )
+let select = document.querySelector('.sort-select'); //<select class="sort-select">
+select.addEventListener("click", (e) => {
+  if (e.target.value === "price_asc") {
+    let sortedProductList = productList.sort((a, b) => {  
+      return parseFloat(a.price) - parseFloat(b.price) ;
+    });
+    wrapper.innerHTML = '';
+    render(sortedProductList, wrapper)
+  };
+
+  if (e.target.value === "price_desc") {
+    let sortedProductList = productList.sort((a, b) => {  
+      return parseFloat(b.price) - parseFloat(a.price) ;
+    });
+    wrapper.innerHTML = '';
+    render(sortedProductList, wrapper)
+  };
+
+  if (e.target.value === "name") {
+    let sortedProductList = productList.sort((producer) => {  
+      return producer;
+    });
+    wrapper.innerHTML = '';
+    render(sortedProductList, wrapper)
+  };
+
+  if (e.target.value === "discount") {
+    let sortedProductListBy = productList.filter((item) => item.discount === true);
+      wrapper.innerHTML = '';
+      render(sortedProductListBy, wrapper)    
+  };
+
+  if (e.target.value === "bestsellers") {
+    let sortedProductList = productList.filter((item) => item.ePrice === true);
+      wrapper.innerHTML = '';
+      render(sortedProductList, wrapper)    
+  };
+
+  if (e.target.value === "all") {
+      wrapper.innerHTML = '';
+      render(productList, wrapper)    
+  };
+});
+
+///show cards
+let select2 = document.querySelector('.sort-select2') //<select class="sort-select2">
+select2.addEventListener("click", (e) => {
+  if (+e.target.value === 0) {
+    wrapper.innerHTML = '';
+    render(productList, wrapper)
+  };
+  if (+e.target.value === 5) {
+    let sortedCard = productList.slice(0, 5);
+    wrapper.innerHTML = '';
+    render(sortedCard, wrapper)
+  };
+  if (+e.target.value === 10) {
+    let sortedCard = productList.slice(0, 10);
+    wrapper.innerHTML = '';
+    render(sortedCard, wrapper)
+  };
+  if (+e.target.value === 15) {
+    let sortedCard = productList.slice(0, 15);
+    wrapper.innerHTML = '';
+    render(sortedCard, wrapper)
+  };
+  if (+e.target.value === 20) {
+    let sortedCard = productList.slice(0, 20);
+    wrapper.innerHTML = '';
+    render(sortedCard, wrapper)
+  };
+  if (+e.target.value === 30) {
+    let sortedCard = productList.slice(0, 30);
+    wrapper.innerHTML = '';
+    render(sortedCard, wrapper)
+  };
+});
 
 
 let x;
 async function getx() {
   let response = await fetch(url)
   let dataResponse = await response.json()
-  let data = dataResponse[0].data
-  // console.log(dataResp);
+  let data = dataResponse[0].data;
   console.log(data);
+  // console.log(dataResponse)
 
-  x = data;
+  productList = data;
   render(data, wrapper);
   countAmount(producerList, data);
   countAmount(processorList, data);
   countScreen(screenSizeList, data);
-  countRam(ramList, data)
+  countRam(ramList, data);
   countSsd(ssdList, data);
-
+  countPrice(data);
 }
-
 getx();
+
+//Checkbox//
+let checkboxProducer = document.querySelectorAll('.check-producer');
+
+checkboxProducer.forEach (el => {
+  el.addEventListener('click', () => {
+    if (this.checked === true) {
+      let filteredList = productList.filter((item) => item.producer === prod)
+      wrapper.innerHTML = '';
+      render(filteredList, wrapper)
+    } 
+    else {
+      wrapper.innerHTML = '';
+    }
+  })
+})
+
+    
+
+//// Check document.getElementById("checkbox").checked = true;
+// Uncheck  document.getElementById("checkbox").checked = false;
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
