@@ -2,7 +2,7 @@ let url = 'https://635d0154cb6cf98e56aa96bd.mockapi.io/productCards';
 let productList;
 let wrapper  = document.querySelector(".cards-list");
 let producerList = ["TOSHIBA", "APPLE", "HP", "ACER", "ASUS", "LENOVO", "DELL"];
-let processorList = ["AMD", "Intel", "AppleM1", "AppleM2"];
+let processorList = ["AMD", "Intel", "M1", "M2"];
 let screenSizeList = [13, 13.3, 14, 15.6, 16, 17.3];
 let ramList = [4, 8, 16, 32, 64];
 let ssdList = ["128GB", "256GB", "512GB", "1TB", "2TB", "4TB"];
@@ -74,7 +74,7 @@ function countAmount(filterList, productList) { ///producer + processor
     let amount = 0;
 
     productList.forEach(product => {
-      if (product.producer === prod || product.processor === prod) 
+      if (product.producer.toUpperCase() === prod || product.processor === prod) 
       amount++
     })
 
@@ -225,17 +225,18 @@ select.addEventListener("click", (e) => {
   };
 
   if (e.target.value === "name") {
-    let sortedProductList = productList.sort((producer) => {  
-      return producer;
-    });
+    let sortedProductList = productList.sort(function (a, b)  {  
+    let nameA = a.producer.toLowerCase(), nameB = b.producer.toLowerCase()
+    if (nameA < nameB) return -1
+    })
     wrapper.innerHTML = '';
     render(sortedProductList, wrapper)
   };
 
   if (e.target.value === "discount") {
-    let sortedProductListBy = productList.filter((item) => item.discount === true);
+    let sortedProductList = productList.filter((item) => item.discount === true);
       wrapper.innerHTML = '';
-      render(sortedProductListBy, wrapper)    
+      render(sortedProductList, wrapper)    
   };
 
   if (e.target.value === "bestsellers") {
@@ -305,21 +306,34 @@ async function getx() {
 getx();
 
 //Checkbox//
-let checkboxProducer = document.querySelectorAll('.check-producer');
+// let checkboxProducer = document.querySelectorAll('.check-producer');
 
-checkboxProducer.forEach (el => {
-  el.addEventListener('click', () => {
-    if (this.checked === true) {
-      let filteredList = productList.filter((item) => item.producer === prod)
-      wrapper.innerHTML = '';
-      render(filteredList, wrapper)
-    } 
-    else {
-      wrapper.innerHTML = '';
-    }
-  })
-})
+// checkboxProducer.forEach (el => {
+//   el.addEventListener('click', () => {
+//     if (this.checked === true) {
+//       let filteredList = productList.filter((item) => item.producer === prod)
+        
+//       wrapper.innerHTML = '';
+//       render(filteredList, wrapper)
+//     } 
+//     // else {
+//     //   wrapper.innerHTML = '';
+//     // }
+//   })
+// })
 
+// let checkboxProcessor = document.querySelectorAll('.check-processor');
+
+// checkboxProcessor.forEach (el => {
+//   el.addEventListener('click', () => {
+//     if (this.checked === true) {
+//       let filteredListProcessor = productList.filter((item) => item.processor === prod)
+        
+//       wrapper.innerHTML = '';
+//       render(filteredListProcessor, wrapper)
+//     } 
+//   })
+// })
     
 
 //// Check document.getElementById("checkbox").checked = true;
